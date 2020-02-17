@@ -1,4 +1,6 @@
-# vue-template
+# Vue 模板项目
+## 插件
+vue + vue-router + vuex + sass
 
 ## Project setup
 ```
@@ -20,5 +22,4 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
