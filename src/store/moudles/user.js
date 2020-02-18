@@ -21,6 +21,7 @@ const user = {
     CLEAR_USER_INFO: state => {
       state.isLogin = false;
       state.userId = null;
+      state.userName = null;
       state.authTree = null;
     }
   },
@@ -48,6 +49,7 @@ const user = {
     logOut({ commit }) {
       localStorage.clear();
       commit("CLEAR_USER_INFO");
+      location.href = "/";
     }
   },
 

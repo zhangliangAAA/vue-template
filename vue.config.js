@@ -63,6 +63,11 @@ module.exports = {
                     path: "/nestRouter/child1",
                     name: "Child1",
                     component: "child1"
+                  },
+                  {
+                    path: "/nestRouter/child2",
+                    name: "Child2",
+                    component: "child2"
                   }
                 ]
               }
