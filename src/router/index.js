@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+// import allRoutes from "./allRoutes"; //用于本地调试
 // import Home from "@/views/Home.vue";
 
 Vue.use(VueRouter);
@@ -7,39 +8,29 @@ Vue.use(VueRouter);
 const initRoutes = [
   {
     path: "/",
-    redirect: "/login"
+    redirect: "/home"
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ "@/views/About.vue")
-  // },
-  // {
-  //   path: "/page1",
-  //   name: "Page1",
-  //   component: () => import(/* webpackChunkName: "about" */ "@/views/Page1.vue")
-  // },
   {
     path: "/login",
     name: "Login",
     component: () => import(/* webpackChunkName: "about" */ "@/views/Login.vue")
+  },
+  {
+    path: "/404",
+    name: "NotFound",
+    component: () =>
+      import(/* webpackChunkName: "404" */ "@/views/NotFound.vue")
   }
-  // {
-  //   path: "*",
-  //   name: "NotFound",
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "@/views/NotFound.vue")
-  // }
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: initRoutes
-});
+const createRouter = () =>
+  new VueRouter({
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: initRoutes
+  });
+
+const router = createRouter();
 
 /**
  * 路由权限方案设计1
@@ -57,9 +48,22 @@ router.beforeEach((to, from, next) => {
   //   next("/login");
   //   //或者执行其他操作
   // } else {
-  next();
+  // next();
   // }
   //路由拦截可根据项目返回的权限自行调整，这里只是做了一个简单的例子
+
+  let isLogin = !!localStorage.getItem("token");
+  if (to.path === "/login" || isLogin) {
+    next();
+  } else {
+    next("/login");
+  }
 });
 
-export default router;
+//重新实例化一个新的路由表，替换之前的路由表，然后将这个方法导出
+//解决重复登录过程中的问题-Duplicate named routes definition
+function resetRouter() {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // the relevant part
+}
+export { router, resetRouter };

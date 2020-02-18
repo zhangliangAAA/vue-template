@@ -9,8 +9,9 @@
 </template>
 
 <script>
-import user from "../service/user.js";
-import { formatRoutes } from "../utils/permission";
+import { hanleRoutes } from "@/utils/permission";
+import { mapActions } from "vuex";
+
 export default {
   name: "Home",
   components: {},
@@ -21,20 +22,32 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["logIn"]),
     login() {
-      user
-        .login({ username: this.name, passwd: this.passWord })
+      // user
+      //   .login({ username: this.name, passwd: this.passWord })
+      //   .then(res => {
+      //     const { routes } = res;
+      //     let rs = formatRoutes(routes);
+      //     console.log("rs", rs);
+
+      //     this.$router.addRoutes(rs);
+      //     console.log(this.$router);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
+
+      this.logIn({ username: this.name, passwd: this.passWord })
         .then(res => {
           const { routes } = res;
-          let rs = formatRoutes(routes);
-          console.log("rs", rs);
-
-          this.$router.addRoutes(rs);
-          console.log(this.$router);
+          hanleRoutes(routes, this);
+          console.log(this.$router.options.routes);
         })
         .catch(err => {
           console.log(err);
         });
+      console.log(this.$router.options.routes);
     }
   }
 };

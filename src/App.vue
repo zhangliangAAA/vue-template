@@ -11,6 +11,29 @@
   </div>
 </template>
 
+<script>
+import { hanleRoutes } from "@/utils/permission";
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {};
+  },
+  created() {
+    let routes = JSON.parse(localStorage.getItem("authTree"));
+    if (routes) {
+      hanleRoutes(routes, this);
+    }
+  },
+  mounted() {},
+  computed: {
+    ...mapGetters(["isLogin"])
+  },
+  methods: {
+    click() {}
+  }
+};
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

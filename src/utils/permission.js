@@ -1,20 +1,27 @@
 /**
- * @param routers 初始数据，为数组格式，一般来说是个空数组
+ * @param routes 初始数据，为数组格式，一般来说是个空数组
  * @param data 后端返回的路由列表数据
  */
 import routesMap from "@/router/routesMap";
-function formatRoutes(routers) {
-  mapRouter(routers);
-  routers.push({
-    path: "*",
-    name: "NotFound",
-    component: () => import("@/views/NotFound.vue")
-  });
-  return routers;
-}
+import { resetRouter } from "@/router";
 
-function mapRouter(routers) {
-  routers.forEach(element => {
+// 处理addRoutes，每次添加路由前，先 重新初试化一个新的路由表，替换之前的路由表
+function hanleRoutes(routes, vm) {
+  const resRoutes = formatRoutes(routes);
+  resetRouter();
+  vm.$router.addRoutes(resRoutes);
+}
+// 将component映射上，并添加通配路由
+function formatRoutes(routes) {
+  mapRouter(routes);
+  routes.push({
+    path: "*",
+    redirect: "/404"
+  });
+  return routes;
+}
+function mapRouter(routes) {
+  routes.forEach(element => {
     element.component = routesMap[element.component];
     if (element.children && element.children.length > 0) {
       mapRouter(element.children);
@@ -22,4 +29,4 @@ function mapRouter(routers) {
   });
 }
 
-export { formatRoutes };
+export { hanleRoutes };

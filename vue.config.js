@@ -21,6 +21,9 @@ module.exports = {
         if (username == "router1" && passwd) {
           res.status(200).json({
             code: 1,
+            token: username + (new Date().getTime() + 1000 * 60),
+            userId: "1",
+            userName: username,
             routes: [
               {
                 path: "/about",
@@ -32,6 +35,9 @@ module.exports = {
         } else if (username && passwd) {
           res.json({
             code: 1,
+            token: username + (new Date().getTime() + 1000 * 60),
+            userId: "all",
+            userName: username,
             routes: [
               {
                 path: "/home",

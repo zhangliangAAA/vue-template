@@ -24,7 +24,7 @@ server.interceptors.response.use(
 
     if (response.config.responseType === "blob") return response;
 
-    const res = response.data;
+    const res = response.data; //data数据提升
     if (!res) {
       alert("服务器异常");
       return Promise.reject("error");
