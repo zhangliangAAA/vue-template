@@ -1,10 +1,18 @@
 <template>
   <div class="login">
-    <div class="content">
-      <p>用户名：<input v-model="name" /></p>
-      <p>密 码：<input v-model="passWord" /></p>
-      <p><button @click="login">登录</button></p>
-    </div>
+    <!-- <div class="content"> -->
+    <el-form label-position="left" label-width="80px">
+      <el-form-item label="用户名：">
+        <el-input v-model="name"></el-input>
+      </el-form-item>
+      <el-form-item label="密码：">
+        <el-input v-model="passWord"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="login">登录</el-button>
+      </el-form-item>
+    </el-form>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -24,25 +32,12 @@ export default {
   methods: {
     ...mapActions(["logIn"]),
     login() {
-      // user
-      //   .login({ username: this.name, passwd: this.passWord })
-      //   .then(res => {
-      //     const { routes } = res;
-      //     let rs = formatRoutes(routes);
-      //     console.log("rs", rs);
-
-      //     this.$router.addRoutes(rs);
-      //     console.log(this.$router);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
-
       this.logIn({ username: this.name, passwd: this.passWord })
         .then(res => {
           const { routes } = res;
           hanleRoutes(routes, this);
           console.log(this.$router.options.routes);
+          this.$router.push({ name: "Home" });
         })
         .catch(err => {
           console.log(err);
@@ -54,6 +49,9 @@ export default {
 </script>
 <style lang="scss">
 .login {
-  background-color: olive;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

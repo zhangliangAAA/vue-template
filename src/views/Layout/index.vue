@@ -6,7 +6,7 @@
       </el-aside>
       <el-container>
         <el-header>
-          <Breadcrumb></Breadcrumb>
+          <Header></Header>
         </el-header>
         <el-main>
           <p>Main</p>
@@ -20,11 +20,11 @@
 
 <script>
 import Sidebar from "./components/Sidebar";
-import Breadcrumb from "./components/Breadcrumb";
+import Header from "./components/Header";
 export default {
   components: {
     Sidebar,
-    Breadcrumb
+    Header
   },
   data() {
     return {};

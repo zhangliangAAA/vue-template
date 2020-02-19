@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sidebar">
     <el-menu
       :default-active="activePath"
       :router="true"
@@ -11,7 +11,7 @@
       text-color="#fff"
       active-text-color="#ffd04b"
     >
-      <SidebarItem :routes="authTree"></SidebarItem>
+      <SidebarItem :routes="resRoutes"></SidebarItem>
     </el-menu>
   </div>
 </template>
@@ -31,7 +31,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["authTree"])
+    ...mapGetters(["authTree"]),
+    resRoutes() {
+      console.log("named-router", this.authTree[0].children);
+      // 由于使用named-router，需要去除根路由
+      return this.authTree[0].children;
+      // return this.$router.options.routes[1].children;
+    }
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -45,8 +51,10 @@ export default {
     },
     computedaActivePath() {
       let matched = this.$route.matched.filter(item => item.name);
-      console.log("matched", matched);
-      this.activePath = matched[matched.length - 1].path;
+
+      let activePath = matched[matched.length - 1].path;
+      console.log("matched", matched, activePath);
+      this.activePath = activePath;
     }
   },
   watch: {
@@ -58,8 +66,12 @@ export default {
 </script>
 
 <style>
+.sidebar {
+  height: 100%;
+}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
-  min-height: 400px;
+  /* min-height: 400px; */
+  height: 100%;
 }
 </style>

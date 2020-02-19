@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <!-- <div class="content">
-      <div class="side">
-        <Sidebar></Sidebar>
-      </div>
-      <div class="main">
-        <Header></Header>
-        <router-view />
-      </div>
-    </div> -->
-    <Layout></Layout>
+    <router-view name="out"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -18,12 +10,12 @@ import { hanleRoutes } from "@/utils/permission";
 import { mapGetters } from "vuex";
 // import Sidebar from "@/views/Sidebar/OriginSidebar.vue";
 // import Header from "@/views/Header";
-import Layout from "@/views/Layout";
+// import Layout from "@/views/Layout";
 export default {
   components: {
     // Sidebar,
     // Header
-    Layout
+    // Layout
   },
   data() {
     return {};
@@ -38,9 +30,7 @@ export default {
   computed: {
     ...mapGetters(["isLogin"])
   },
-  methods: {
-    click() {}
-  }
+  methods: {}
 };
 </script>
 

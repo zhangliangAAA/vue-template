@@ -16,14 +16,15 @@ function hanleRoutes(routes, vm) {
 // 将component映射上，并添加通配路由
 function formatRoutes(routes) {
   mapRouter(routes);
-  routes.push({
-    path: "*",
-    redirect: "/404"
-  });
+  // routes.push({
+  //   path: "*",
+  //   redirect: "/404"
+  // });
   return routes;
 }
 function mapRouter(routes) {
   routes.forEach(element => {
+    if (!element.component) return;
     element.component = routesMap[element.component];
     if (element.children && element.children.length > 0) {
       mapRouter(element.children);

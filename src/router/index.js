@@ -1,33 +1,41 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import nameRoutes from "./nameRoutes"; //用于本地调试
 // import allRoutes from "./allRoutes"; //用于本地调试
 // import Home from "@/views/Home.vue";
 
-Vue.use(VueRouter);
+/**
+ * 解决 在当前页面中点击 还到当前页面的router-link 时 的报错: NavigationDuplicated
+ */
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+};
 
+Vue.use(VueRouter);
 const initRoutes = [
-  {
-    path: "/",
-    redirect: "/home"
-  },
+  // {
+  //   path: "/",
+  //   redirect: "/home"
+  // },
   {
     path: "/login",
     name: "Login",
     component: () => import(/* webpackChunkName: "about" */ "@/views/Login.vue")
-  },
-  {
-    path: "/404",
-    name: "NotFound",
-    component: () =>
-      import(/* webpackChunkName: "404" */ "@/views/NotFound.vue")
   }
+  // {
+  //   path: "/404",
+  //   name: "NotFound",
+  //   component: () =>
+  //     import(/* webpackChunkName: "404" */ "@/views/NotFound.vue")
+  // }
 ];
 
 const createRouter = () =>
   new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
-    routes: initRoutes
+    routes: initRoutes || nameRoutes
   });
 
 const router = createRouter();
