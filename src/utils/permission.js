@@ -9,6 +9,8 @@ import { resetRouter } from "@/router";
 function hanleRoutes(routes, vm) {
   const resRoutes = formatRoutes(routes);
   resetRouter();
+  console.log("最终加载的routes", resRoutes);
+
   vm.$router.addRoutes(resRoutes);
 }
 // 将component映射上，并添加通配路由

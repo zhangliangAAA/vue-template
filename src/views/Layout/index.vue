@@ -2,11 +2,12 @@
   <div class="layout">
     <el-container class="layoutContent">
       <el-aside width="200px">
-        Aside
-        <NavMenu></NavMenu>
+        <Sidebar></Sidebar>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <Breadcrumb></Breadcrumb>
+        </el-header>
         <el-main>
           <p>Main</p>
           <router-view />
@@ -18,10 +19,12 @@
 </template>
 
 <script>
-import NavMenu from "./components/NavMenu";
+import Sidebar from "./components/Sidebar";
+import Breadcrumb from "./components/Breadcrumb";
 export default {
   components: {
-    NavMenu
+    Sidebar,
+    Breadcrumb
   },
   data() {
     return {};
@@ -32,11 +35,15 @@ export default {
 <style lang="scss">
 .layout {
   height: 100vh;
+  .el-aside {
+    text-align: left;
+  }
   .layoutContent {
     height: 100%;
   }
 }
-.el-header,
+.el-header {
+}
 .el-footer {
   background-color: #b3c0d1;
   color: #333;

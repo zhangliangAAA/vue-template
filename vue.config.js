@@ -42,31 +42,56 @@ module.exports = {
               {
                 path: "/home",
                 name: "Home",
+                meta: {
+                  title: "首页",
+                  visible: true
+                },
                 component: "home"
               },
               {
                 path: "/about",
                 name: "About",
+                meta: {
+                  title: "关于",
+                  visible: false
+                },
                 component: "about"
               },
               {
                 path: "/page1",
                 name: "Page1",
+                meta: {
+                  title: "页面1",
+                  visible: true
+                },
                 component: "page1"
               },
               {
                 path: "/nestRouter",
                 name: "NestRouter",
                 component: "nestRouter",
+                redirect: "/nestRouter/child2",
+                meta: {
+                  title: "嵌套路由",
+                  visible: true
+                },
                 children: [
                   {
                     path: "/nestRouter/child1",
                     name: "Child1",
+                    meta: {
+                      title: "嵌套路由1",
+                      visible: true
+                    },
                     component: "child1"
                   },
                   {
                     path: "/nestRouter/child2",
                     name: "Child2",
+                    meta: {
+                      title: "嵌套路由2",
+                      visible: false
+                    },
                     component: "child2"
                   }
                 ]
