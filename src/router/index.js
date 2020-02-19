@@ -1,25 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import testRoutes from "./test";
 // import allRoutes from "./allRoutes"; //用于本地调试
 // import Home from "@/views/Home.vue";
 
 Vue.use(VueRouter);
 
 const initRoutes = [
-  {
-    path: "/",
-    redirect: "/home"
-  },
+  // {
+  //   path: "/",
+  //   redirect: "/home"
+  // },
   {
     path: "/login",
     name: "Login",
-    component: () => import(/* webpackChunkName: "about" */ "@/views/Login.vue")
+    components: {
+      out: () => import(/* webpackChunkName: "login" */ "@/views/Login.vue")
+    }
   },
   {
     path: "/404",
     name: "NotFound",
     component: () =>
       import(/* webpackChunkName: "404" */ "@/views/NotFound.vue")
+  },
+  {
+    path: "/",
+    name: "main",
+    component: () => import(/* webpackChunkName: "main" */ "@/views/Layout")
   }
 ];
 
@@ -27,7 +35,7 @@ const createRouter = () =>
   new VueRouter({
     mode: "history",
     base: process.env.BASE_URL,
-    routes: initRoutes
+    routes: testRoutes || initRoutes
   });
 
 const router = createRouter();

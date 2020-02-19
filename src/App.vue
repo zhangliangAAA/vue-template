@@ -9,7 +9,9 @@
         <router-view />
       </div>
     </div> -->
-    <Layout></Layout>
+    <router-view class="loginview" name="out"></router-view>
+    <router-view></router-view>
+    <!-- <Layout></Layout> -->
   </div>
 </template>
 
@@ -18,12 +20,12 @@ import { hanleRoutes } from "@/utils/permission";
 import { mapGetters } from "vuex";
 // import Sidebar from "@/views/Sidebar/OriginSidebar.vue";
 // import Header from "@/views/Header";
-import Layout from "@/views/Layout";
+// import Layout from "@/views/Layout";
 export default {
   components: {
     // Sidebar,
     // Header
-    Layout
+    // Layout
   },
   data() {
     return {};
@@ -31,7 +33,7 @@ export default {
   created() {
     let routes = JSON.parse(localStorage.getItem("authTree"));
     if (routes) {
-      hanleRoutes(routes, this);
+      // hanleRoutes(routes, this);
     }
   },
   mounted() {},

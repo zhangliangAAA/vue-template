@@ -40,9 +40,10 @@ export default {
 
       this.logIn({ username: this.name, passwd: this.passWord })
         .then(res => {
-          const { routes } = res;
-          hanleRoutes(routes, this);
-          console.log(this.$router.options.routes);
+          // const { routes } = res;
+          // hanleRoutes(routes, this);
+          // console.log(this.$router.options.routes);
+          this.$router.push({ name: "Home" });
         })
         .catch(err => {
           console.log(err);

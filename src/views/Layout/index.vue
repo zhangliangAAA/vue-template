@@ -6,7 +6,11 @@
         <NavMenu></NavMenu>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          Header
+          <router-link to="/about">about</router-link>
+          <router-link to="/nestRouter/child1">nestRouter-child1</router-link>
+        </el-header>
         <el-main>
           <p>Main</p>
           <router-view />
